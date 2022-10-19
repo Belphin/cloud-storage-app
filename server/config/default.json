@@ -1,0 +1,5 @@
+{
+	"serverPort": 5000,
+	"dbUrl": "mongodb+srv://user:user@cloud.byzqdgi.mongodb.net/?retryWrites=true&w=majority",
+	"secretKey": "mySecretKey"
+}
