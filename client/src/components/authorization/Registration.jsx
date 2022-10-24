@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Input from "../../utils/input/input";
-import "./registration.scss";
+import "./authorization.scss";
 import { useDispatch } from "react-redux";
 import { setRegistr } from "../../redux/actionCreator";
 
@@ -8,9 +8,19 @@ const Registration = () => {
 	const dispatch = useDispatch();
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
+	const [confirmPassword, setConfirmPassword] = useState("");
+
+	const registration = () => {
+		if (password !== confirmPassword) {
+			alert("Password must match");
+			return;
+		}
+		dispatch(setRegistr({ email, password }));
+	};
+
 	return (
-		<div className="registration">
-			<div className="registration__header">Registration</div>
+		<div className="authorization">
+			<div className="authorization__header">Registration</div>
 			<Input
 				value={email}
 				setValue={setEmail}
@@ -23,9 +33,13 @@ const Registration = () => {
 				type="password"
 				placeholder="Enter password..."
 			/>
-			<button
-				className="registration__btn"
-				onClick={() => dispatch(setRegistr({ email, password }))}>
+			<Input
+				value={confirmPassword}
+				setValue={setConfirmPassword}
+				type="password"
+				placeholder="Confirm the password..."
+			/>
+			<button className="authorization__btn" onClick={registration}>
 				Login
 			</button>
 		</div>

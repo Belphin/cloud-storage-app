@@ -2,7 +2,7 @@ import React from "react";
 import { Routes, Route } from "react-router-dom";
 import { publicRoutes } from "../router";
 
-const AppRouter = () => {
+const AuthRouter = () => {
 	return (
 		<Routes>
 			{publicRoutes.map((route) => (
@@ -12,4 +12,4 @@ const AppRouter = () => {
 	);
 };
 
-export default AppRouter;
+export default AuthRouter;

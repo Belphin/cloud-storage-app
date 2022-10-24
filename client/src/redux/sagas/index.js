@@ -1,5 +1,5 @@
-import user from "./userSaga";
+import auth from "./authSaga";
 
 export default function* rootSaga() {
-	yield user();
+	yield auth();
 }

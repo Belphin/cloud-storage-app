@@ -8,7 +8,7 @@ const Navbar = () => {
 			<div className="container">
 				<div className="navbar__header">CLOUD STORAGE</div>
 				<div className="navbar__login">
-					<NavLink>Login</NavLink>
+					<NavLink to="/login">Login</NavLink>
 				</div>
 				<div className="navbar__registration">
 					<NavLink to="/registration">Registration</NavLink>
