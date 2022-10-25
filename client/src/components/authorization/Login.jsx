@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Input from "../../utils/input/input";
 import "./authorization.scss";
 import { useDispatch } from "react-redux";
-import { setAuthorization } from "../../redux/actionCreator";
+import { setLogin } from "../../redux/actionCreator";
 
 const Login = () => {
 	const dispatch = useDispatch();
@@ -10,7 +10,7 @@ const Login = () => {
 	const [password, setPassword] = useState("");
 
 	const registration = () => {
-		dispatch(setAuthorization({ email, password }));
+		dispatch(setLogin({ email, password }));
 	};
 
 	return (
