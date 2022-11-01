@@ -1,7 +1,7 @@
 import React from "react";
 import Navbar from "./navbar/Navbar";
 import "./app.scss";
-import AuthRouter from "./AuthRouter";
+import AppRouter from "./AppRouter";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { setAuthorization } from "../redux/actionCreator";
@@ -17,7 +17,9 @@ function App() {
 	return (
 		<div className="app">
 			<Navbar isAuth={isAuth} />
-			<div className="wrap">{!isAuth && <AuthRouter />}</div>
+			<div className="wrap">
+				<AppRouter isAuth={isAuth} />
+			</div>
 		</div>
 	);
 }
