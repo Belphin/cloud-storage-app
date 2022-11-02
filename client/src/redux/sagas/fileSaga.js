@@ -1,6 +1,7 @@
-import { call, takeEvery } from "redux-saga/effects";
+import { call, put, takeEvery } from "redux-saga/effects";
 import axios from "axios";
 import { GET_FILES } from "../actions";
+import { setFiles } from "../actionCreator";
 
 function* getFiles({ payload }) {
 	try {
@@ -11,7 +12,7 @@ function* getFiles({ payload }) {
 			}`,
 			{ headers: { Authorization: `Bearer ${localStorage.getItem("token")}` } }
 		);
-		console.log(response.data);
+		yield put(setFiles(response.data));
 	} catch (e) {
 		alert(e.response.data.message);
 	}
