@@ -8,6 +8,11 @@ export const LOGOUT_USER = "LOGOUT_USER";
 
 // file
 export const GET_FILES = "GET_FILES";
+export const CREATE_DIR = "CREATE_DIR";
 
 export const SET_FILES = "SET_FILES";
 export const SET_CURRENT_DIR = "SET_CURRENT_DIR";
+export const ADD_FILE = "ADD_FILE";
+
+//popup
+export const SET_POPUP_DISPLAY = "SET_POPUP_DISPLAY";

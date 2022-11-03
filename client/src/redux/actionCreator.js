@@ -7,6 +7,9 @@ import {
 	SET_FILES,
 	SET_CURRENT_DIR,
 	GET_FILES,
+	CREATE_DIR,
+	ADD_FILE,
+	SET_POPUP_DISPLAY,
 } from "./actions";
 
 // user
@@ -25,6 +28,17 @@ export const getFiles = (currentDir) => ({
 	type: GET_FILES,
 	payload: currentDir,
 });
+export const createDir = (currentDir, name) => ({
+	type: CREATE_DIR,
+	payload: { dirId: currentDir, name },
+});
 
 export const setFiles = (files) => ({ type: SET_FILES, payload: files });
 export const setCurrentDir = (dir) => ({ type: SET_CURRENT_DIR, payload: dir });
+export const addFile = (file) => ({ type: ADD_FILE, payload: file });
+
+//popup
+export const setPopupDisplay = (display) => ({
+	type: SET_POPUP_DISPLAY,
+	payload: display,
+});
