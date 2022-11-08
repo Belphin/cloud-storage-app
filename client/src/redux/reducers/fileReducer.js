@@ -1,5 +1,6 @@
 import {
 	ADD_FILE,
+	PUSH_TO_STACK,
 	SET_CURRENT_DIR,
 	SET_FILES,
 	SET_POPUP_DISPLAY,
@@ -9,6 +10,7 @@ const defaultState = {
 	files: [],
 	currentDir: null,
 	popupDisplay: "none",
+	diskStack: [],
 };
 
 export default function file(state = defaultState, { type, payload }) {
@@ -21,6 +23,8 @@ export default function file(state = defaultState, { type, payload }) {
 			return { ...state, files: [...state.files, payload] };
 		case SET_POPUP_DISPLAY:
 			return { ...state, popupDisplay: payload };
+		case PUSH_TO_STACK:
+			return { ...state, diskStack: [...state.diskStack, payload] };
 		default:
 			return state;
 	}

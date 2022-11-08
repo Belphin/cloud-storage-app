@@ -10,6 +10,8 @@ import {
 	CREATE_DIR,
 	ADD_FILE,
 	SET_POPUP_DISPLAY,
+	PUSH_TO_STACK,
+	POP_FROM_STACK,
 } from "./actions";
 
 // user
@@ -36,6 +38,8 @@ export const createDir = (currentDir, name) => ({
 export const setFiles = (files) => ({ type: SET_FILES, payload: files });
 export const setCurrentDir = (dir) => ({ type: SET_CURRENT_DIR, payload: dir });
 export const addFile = (file) => ({ type: ADD_FILE, payload: file });
+
+export const pushToStack = (dir) => ({ type: PUSH_TO_STACK, payload: dir });
 
 //popup
 export const setPopupDisplay = (display) => ({
