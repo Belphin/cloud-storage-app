@@ -12,6 +12,7 @@ import {
 	SET_POPUP_DISPLAY,
 	PUSH_TO_STACK,
 	POP_FROM_STACK,
+	UPLOAD_FILE,
 } from "./actions";
 
 // user
@@ -40,6 +41,10 @@ export const setCurrentDir = (dir) => ({ type: SET_CURRENT_DIR, payload: dir });
 export const addFile = (file) => ({ type: ADD_FILE, payload: file });
 
 export const pushToStack = (dir) => ({ type: PUSH_TO_STACK, payload: dir });
+export const uploadFile = (file, currentDir) => ({
+	type: UPLOAD_FILE,
+	payload: { file, dirId: currentDir },
+});
 
 //popup
 export const setPopupDisplay = (display) => ({

@@ -10,14 +10,14 @@ const File = ({ file }) => {
 	const currentDir = useSelector((state) => state.file.currentDir);
 
 	function openDirHandler() {
-		dispatch(pushToStack(currentDir));
-		dispatch(setCurrentDir(file._id));
+		if (file.type === "dir") {
+			dispatch(pushToStack(currentDir));
+			dispatch(setCurrentDir(file._id));
+		}
 	}
 
 	return (
-		<div
-			className="file"
-			onClick={file.type === "dir" ? () => openDirHandler() : ""}>
+		<div className="file" onClick={() => openDirHandler()}>
 			<img
 				src={file.type === "dir" ? dirLogo : fileLogo}
 				alt=""
