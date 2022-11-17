@@ -1,6 +1,6 @@
 import { call, put, takeEvery } from "redux-saga/effects";
 import axios from "axios";
-import { CREATE_DIR, GET_FILES, UPLOAD_FILE } from "../actions";
+import { CREATE_DIR, DOWNLOAD_FILE, GET_FILES, UPLOAD_FILE } from "../actions";
 import { addFile, setFiles } from "../actionCreator";
 
 function* getFiles({ payload }) {
@@ -71,8 +71,31 @@ function* uploadFile({ payload }) {
 	}
 }
 
+function* downloadFile({ payload }) {
+	const response = yield call(
+		fetch,
+		`http://localhost:5000/api/files/download?id=${payload._id}`,
+		{
+			headers: {
+				Authorization: `Bearer ${localStorage.getItem("token")}`,
+			},
+		}
+	);
+	if (response.status === 200) {
+		const blob = yield response.blob();
+		const downloadUrl = window.URL.createObjectURL(blob);
+		const link = document.createElement("a");
+		link.href = downloadUrl;
+		link.download = payload.name;
+		document.body.appendChild(link);
+		link.click();
+		link.remove();
+	}
+}
+
 export default function* file() {
 	yield takeEvery(GET_FILES, getFiles);
 	yield takeEvery(CREATE_DIR, createDir);
 	yield takeEvery(UPLOAD_FILE, uploadFile);
+	yield takeEvery(DOWNLOAD_FILE, downloadFile);
 }

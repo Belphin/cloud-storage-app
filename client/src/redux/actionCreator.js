@@ -13,6 +13,7 @@ import {
 	PUSH_TO_STACK,
 	POP_FROM_STACK,
 	UPLOAD_FILE,
+	DOWNLOAD_FILE,
 } from "./actions";
 
 // user
@@ -45,6 +46,7 @@ export const uploadFile = (file, currentDir) => ({
 	type: UPLOAD_FILE,
 	payload: { file, dirId: currentDir },
 });
+export const downloadFile = (file) => ({ type: DOWNLOAD_FILE, payload: file });
 
 //popup
 export const setPopupDisplay = (display) => ({
