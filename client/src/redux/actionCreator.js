@@ -11,9 +11,10 @@ import {
 	ADD_FILE,
 	SET_POPUP_DISPLAY,
 	PUSH_TO_STACK,
-	POP_FROM_STACK,
 	UPLOAD_FILE,
 	DOWNLOAD_FILE,
+	DELETE_FILE,
+	ASYNC_DELETE_FILE,
 } from "./actions";
 
 // user
@@ -47,6 +48,11 @@ export const uploadFile = (file, currentDir) => ({
 	payload: { file, dirId: currentDir },
 });
 export const downloadFile = (file) => ({ type: DOWNLOAD_FILE, payload: file });
+export const asyncDeleteFile = (id) => ({
+	type: ASYNC_DELETE_FILE,
+	payload: id,
+});
+export const deleteFile = (id) => ({ type: DELETE_FILE, payload: id });
 
 //popup
 export const setPopupDisplay = (display) => ({

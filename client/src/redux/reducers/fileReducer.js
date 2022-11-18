@@ -1,5 +1,6 @@
 import {
 	ADD_FILE,
+	DELETE_FILE,
 	PUSH_TO_STACK,
 	SET_CURRENT_DIR,
 	SET_FILES,
@@ -25,6 +26,11 @@ export default function file(state = defaultState, { type, payload }) {
 			return { ...state, popupDisplay: payload };
 		case PUSH_TO_STACK:
 			return { ...state, diskStack: [...state.diskStack, payload] };
+		case DELETE_FILE:
+			return {
+				...state,
+				files: [...state.files.filter((file) => file._id != payload)],
+			};
 		default:
 			return state;
 	}

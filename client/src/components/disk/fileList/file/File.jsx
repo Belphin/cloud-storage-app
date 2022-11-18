@@ -4,6 +4,7 @@ import dirLogo from "../../../../assets/dir.svg";
 import fileLogo from "../../../../assets/file.svg";
 import { useDispatch, useSelector } from "react-redux";
 import {
+	asyncDeleteFile,
 	downloadFile,
 	pushToStack,
 	setCurrentDir,
@@ -25,6 +26,11 @@ const File = ({ file }) => {
 		dispatch(downloadFile(file));
 	}
 
+	function deleteClickHandler(e) {
+		e.stopPropagation();
+		dispatch(asyncDeleteFile(file._id));
+	}
+
 	return (
 		<div className="file" onClick={() => openDirHandler()}>
 			<img
@@ -42,7 +48,11 @@ const File = ({ file }) => {
 					download
 				</button>
 			)}
-			<button className="file__btn file__delete">delete</button>
+			<button
+				className="file__btn file__delete"
+				onClick={(e) => deleteClickHandler(e)}>
+				delete
+			</button>
 		</div>
 	);
 };

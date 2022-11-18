@@ -1,7 +1,13 @@
 import { call, put, takeEvery } from "redux-saga/effects";
 import axios from "axios";
-import { CREATE_DIR, DOWNLOAD_FILE, GET_FILES, UPLOAD_FILE } from "../actions";
-import { addFile, setFiles } from "../actionCreator";
+import {
+	ASYNC_DELETE_FILE,
+	CREATE_DIR,
+	DOWNLOAD_FILE,
+	GET_FILES,
+	UPLOAD_FILE,
+} from "../actions";
+import { addFile, deleteFile, setFiles } from "../actionCreator";
 
 function* getFiles({ payload }) {
 	try {
@@ -14,7 +20,7 @@ function* getFiles({ payload }) {
 		);
 		yield put(setFiles(response.data));
 	} catch (e) {
-		alert(e.response.data.message);
+		alert(e?.response?.data?.message);
 	}
 }
 
@@ -30,7 +36,7 @@ function* createDir({ payload }) {
 		console.log(response.data);
 		yield put(addFile(response.data));
 	} catch (e) {
-		alert(e.response.data.message);
+		alert(e?.response?.data?.message);
 	}
 }
 
@@ -67,29 +73,52 @@ function* uploadFile({ payload }) {
 		);
 		yield put(addFile(response.data));
 	} catch (e) {
-		alert(e.response.data.message);
+		alert(e?.response?.data?.message);
 	}
 }
 
 function* downloadFile({ payload }) {
-	const response = yield call(
-		fetch,
-		`http://localhost:5000/api/files/download?id=${payload._id}`,
-		{
-			headers: {
-				Authorization: `Bearer ${localStorage.getItem("token")}`,
-			},
+	try {
+		const response = yield call(
+			fetch,
+			`http://localhost:5000/api/files/download?id=${payload._id}`,
+			{
+				headers: {
+					Authorization: `Bearer ${localStorage.getItem("token")}`,
+				},
+			}
+		);
+		if (response.status === 200) {
+			const blob = yield response.blob();
+			const downloadUrl = window.URL.createObjectURL(blob);
+			const link = document.createElement("a");
+			link.href = downloadUrl;
+			link.download = payload.name;
+			document.body.appendChild(link);
+			link.click();
+			link.remove();
 		}
-	);
-	if (response.status === 200) {
-		const blob = yield response.blob();
-		const downloadUrl = window.URL.createObjectURL(blob);
-		const link = document.createElement("a");
-		link.href = downloadUrl;
-		link.download = payload.name;
-		document.body.appendChild(link);
-		link.click();
-		link.remove();
+	} catch (e) {
+		alert(e?.response?.data?.message);
+	}
+}
+
+function* removeFile({ payload }) {
+	try {
+		console.log(payload);
+		const response = yield call(
+			axios.delete,
+			`http://localhost:5000/api/files?id=${payload}`,
+			{
+				headers: {
+					Authorization: `Bearer ${localStorage.getItem("token")}`,
+				},
+			}
+		);
+		yield put(deleteFile(payload));
+		alert(response.data.message);
+	} catch (e) {
+		alert(e?.response?.data?.message);
 	}
 }
 
@@ -98,4 +127,5 @@ export default function* file() {
 	yield takeEvery(CREATE_DIR, createDir);
 	yield takeEvery(UPLOAD_FILE, uploadFile);
 	yield takeEvery(DOWNLOAD_FILE, downloadFile);
+	yield takeEvery(ASYNC_DELETE_FILE, removeFile);
 }

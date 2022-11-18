@@ -17,6 +17,8 @@ export const ADD_FILE = "ADD_FILE";
 export const PUSH_TO_STACK = "PUSH_TO_STACK";
 export const UPLOAD_FILE = "UPLOAD_FILE";
 export const DOWNLOAD_FILE = "DOWNLOAD_FILE";
+export const DELETE_FILE = "DELETE_FILE";
+export const ASYNC_DELETE_FILE = "ASYNC_DELETE_FILE";
 
 //popup
 export const SET_POPUP_DISPLAY = "SET_POPUP_DISPLAY";
